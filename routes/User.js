@@ -7,6 +7,11 @@ app.use(express.json());
 
 router.post("/login", async (req, res) => {
 	try {
+		if (!req.body.fname || !req.body.lname || !req.body.phone) {
+			return res.status(400).json({
+				error: "Fields 'fname', 'lname', and 'phone' are required.",
+			});
+		}
 		const userDetails = new User({
 			fname: req.body.fname,
 			lname: req.body.lname,
