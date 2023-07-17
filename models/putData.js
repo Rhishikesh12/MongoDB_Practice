@@ -10,14 +10,14 @@ const userDetails = mongoose.Schema({
 		required: true,
 	},
 	phone: {
-		type: Number,
+		type: String,
 		required: true,
 	},
 	residence: {
 		type: String,
 	},
 	age: {
-		type: Number,
+		type: Number, // Change the type to Number
 	},
 });
 
