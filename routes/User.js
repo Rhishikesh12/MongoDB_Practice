@@ -52,4 +52,27 @@ router.delete("/user/:id", async (req, res) => {
 	}
 });
 
+// * To update the User Data
+
+router.put("/user/:id", async (req, res) => {
+	try {
+		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+			new: true, // Return the updated document
+			runValidators: true, // Validate the updated fields
+		});
+
+		if (!updatedUser) {
+			// If the user with the provided ID doesn't exist
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		res
+			.status(200)
+			.json({ message: "User info has been updated", updatedUser });
+	} catch (err) {
+		console.error("Error updating user data:", err);
+		res.status(500).json({ error: "Failed to update user data" });
+	}
+});
+
 module.exports = router;
